@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
-import ListItem from './ListComponent';
+import ListItem from './ListItemComponent';
 
 
 const RestaurantComponent = (props)=>{
@@ -13,6 +13,7 @@ const RestaurantComponent = (props)=>{
         title:{
             fontSize: 20,
             color: 'black',
+            marginLeft: 10,
             fontWeight: 'bold'
         }
     });
@@ -22,12 +23,12 @@ const RestaurantComponent = (props)=>{
             <Text style = {styles.title}>{props.title}</Text>
             <FlatList
                 horizontal
-                keyExtractor = {(item)=>{return item.id}}
+                keyExtractor = {(item)=>{return item.id;}}
                 data= {props.data}
-                scrollEnabled = {false}
+                showsHorizontalScrollIndicator = {false}
                 renderItem = {({item})=> {
                     return(
-                        <ListItem item = {item}/>
+                        <ListItem data = {item}/>
                     );
                 }}/>
         </View>

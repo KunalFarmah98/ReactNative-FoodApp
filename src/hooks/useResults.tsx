@@ -18,8 +18,7 @@ const useResults = ()=>{
                         location: 'NYC'
                     }
                 });
-                console.log(resp.data.bussineses);
-                setResults(resp.data.bussineses);
+                setResults(resp.data.businesses);
             }
             catch(err){
                 console.log(err);

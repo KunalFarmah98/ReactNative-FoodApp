@@ -15,10 +15,10 @@ const SearchScreen = ()=>{
     const [callSearchApi, results, error] = useResults();
     
 
-    const filterResultsbyPrice = (price) =>{
-        // price is '$', '$$', or '$$$'
+    const filterResultsbyPrice = (p:String) =>{
+        //price is '$', '$$', or '$$$'
         return results.filter(result=>{
-            return results.price === price;
+            return result.price === p;
         });
     }
 
@@ -34,7 +34,7 @@ const SearchScreen = ()=>{
                     <RestaurantComponent title='Bit Costlier'  data = {filterResultsbyPrice('$$')}/>
                     <RestaurantComponent title='Big Spender'  data = {filterResultsbyPrice('$$$')}/>
 
-                {error.length>0?<Text>{error}</Text>:<Text>We found {results.length} results</Text>}
+                {/* {error.length>0?<Text>{error}</Text>:<Text>We found {results.length} results</Text>} */}
                 </ScrollView>
             </View>
     );
