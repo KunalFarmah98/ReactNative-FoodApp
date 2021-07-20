@@ -2,12 +2,12 @@ import React from 'react';
 import {View, StyleSheet, Text } from 'react-native';
 
 
-const ExploreScreen = ()=>{
+const ContactScreen = ()=>{
 
 
     return(
             <View style = {styles.background}>
-                <Text>Explore</Text>
+                <Text>Contact</Text>
             </View>
     );
 
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default ExploreScreen;
+export default ContactScreen;
