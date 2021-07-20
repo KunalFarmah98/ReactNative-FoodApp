@@ -9,11 +9,6 @@ import {HomeStackScreen, ExploreStackScreen, ContactStackScreen} from '../naviga
 
 const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
 
-const IoniconsHeaderButton = (props) => (
-  <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
-);
-
-
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
