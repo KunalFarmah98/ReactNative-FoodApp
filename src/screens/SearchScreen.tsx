@@ -12,7 +12,7 @@ const SearchScreen = ()=>{
     const [term, setTerm] = useState("");
 
     // any logic that gives out some results that populate data can be viewed as a hook
-    const [callSearchApi, results, error] = useResults();
+    const [callSearchApi, results] = useResults();
     
 
     const filterResultsbyPrice = (p:String) =>{

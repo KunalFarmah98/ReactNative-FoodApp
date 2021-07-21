@@ -1,10 +1,9 @@
 import React from 'react';
 import Ionicons from 'react-native-ionicons';
-import { HeaderButton, HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { Platform } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {HomeStackScreen, ExploreStackScreen, ContactStackScreen} from '../navigators/StackNavigator';
+import {HomeStackScreen, FavoriteStackScreen} from '../navigators/StackNavigator';
 
 
 const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
@@ -30,10 +29,10 @@ const BottomTabNavigator = () => {
         }} />
 
       <Tab.Screen
-        name="Explore"
-        component={ExploreStackScreen}
+        name="Favorites"
+        component={FavoriteStackScreen}
         options={{
-          tabBarLabel: 'Explore',
+          tabBarLabel: 'Favorites',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="globe" color={color} size={25} />
           ),

@@ -19,13 +19,12 @@ const ListItem = ({ data }) => {
     const addToFavourites = (item) => {
         db.transaction((tx) => {
             tx.executeSql('SELECT * FROM fav WHERE ID = ?', [item.id], function (tx, res) {
-                console.log(res.rows.length);
                 if (res.rows.length <= 0) {
                     try {
                         db.transaction((txn) => {
                             txn.executeSql(
                                 'INSERT INTO fav(id, name, image, rating, stars, price) VALUES(?,?,?,?,?,?)',
-                                [item.id, item.name, item.image_url, item.rating, item.review_count, item.price]
+                                [item.id, item.name, item.image, item.rating, item.review_count, item.price]
                             );
                         });
                         console.log(`added ${item.name}`);

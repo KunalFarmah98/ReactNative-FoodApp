@@ -5,13 +5,13 @@ import { HeaderButton, HeaderButtons, Item } from 'react-navigation-header-butto
 
 
 import SearchScreen from '../screens/SearchScreen'
-import ExploreScreen from '../screens/ExploreScreen';
+import FavoriteScreen from '../screens/FavoriteScreen';
 import ContactScreen from '../screens/ContactScreen';
 
 
 
 const HomeStack = createStackNavigator();
-const ExploreStack = createStackNavigator();
+const FavoriteStack = createStackNavigator();
 const ContactStack = createStackNavigator();
 
 
@@ -44,14 +44,14 @@ const HomeStackScreen = ({ navigation }) => {
 
 // creating stack navigator for explore
 
-const ExploreStackScreen = ({ navigation }) => {
+const FavoriteStackScreen = ({ navigation }) => {
     return (
-        <ExploreStack.Navigator>
-            <ExploreStack.Screen
-                name="Explore"
-                component={ExploreScreen}
+        <FavoriteStack.Navigator>
+            <FavoriteStack.Screen
+                name="Favorite"
+                component={FavoriteScreen}
                 options={({ route }) => ({
-                    headerTitle: 'Explore Restaurants',
+                    headerTitle: 'Favorite Restaurants',
                     headerLeft: () => {
                         return (
                             <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
@@ -61,7 +61,7 @@ const ExploreStackScreen = ({ navigation }) => {
                     }
                 })}
             />
-        </ExploreStack.Navigator>
+        </FavoriteStack.Navigator>
     );
 }
 
@@ -86,4 +86,4 @@ const ContactStackScreen = ({ navigation }) => {
     );
 }
 
-export {HomeStackScreen, ExploreStackScreen, ContactStackScreen};
+export {HomeStackScreen, FavoriteStackScreen, ContactStackScreen};

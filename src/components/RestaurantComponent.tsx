@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
+import FavItem from './FavoriteItemComponent';
 import ListItem from './ListItemComponent';
 
 
@@ -28,7 +29,7 @@ const RestaurantComponent = (props)=>{
                 showsHorizontalScrollIndicator = {false}
                 renderItem = {({item})=> {
                     return(
-                        <ListItem data = {item}/>
+                        props.isFavorite?<FavItem data = {item}/>:<ListItem data = {item}/>
                     );
                 }}/>
         </View>
