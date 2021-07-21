@@ -1,60 +1,69 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { Image, Text, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-ionicons';
-import SQLite from "react-native-sqlite-2";
+import SQLite from "react-native-sqlite-storage";
 
 
 
-const db = SQLite.openDatabase({ name: 'fav.db', location: 'default' });
-
-let isPresent = false;
-
-
-const addToFavourites = (item) => {
-    db.transaction((txn) => {
-        console.log(`adding ${item.name} to fav`);
-        txn.executeSql(
-            'INSERT INTO fav VALUES(:id, :name, :image, :rating, :stars, :price)',
-            [item.id, item.name, item.image_url, item.review_count, item.rating, item.price]
-        );
-    })
-}
-
-
+const db = SQLite.openDatabase({ name: 'Favorite.db', location: 'default' },
+    () => { console.log('db opnened') },
+    err => {
+        console.log('error opening db: ' + err)
+    });
 
 const ListItem = ({ data }) => {
 
-    useEffect(()=>{
-        console.log(`current id is ${data.id}`);
-        db.transaction(txn => {
-            txn.executeSql('CREATE TABLE IF NOT EXISTS fav(id VARCHAR(255), name VARCHAR(255), image VARCHAR(255), rating VARCHAR(255), stars VARCHAR(255), price VARCHAR(255))', []);
-        });
-        db.transaction((txn) => {
-            txn.executeSql("SELECT * FROM fav", [], function (tx, res) {
-                for (let i = 0; i < res.rows.length; ++i) {
-                    console.log("item:", res.rows.item(i));
+    const [isPresent, setPresent] = useState(data.isPresent);
+
+    const addToFavourites = (item) => {
+        db.transaction((tx) => {
+            tx.executeSql('SELECT * FROM fav WHERE ID = ?', [item.id], function (tx, res) {
+                console.log(res.rows.length);
+                if (res.rows.length <= 0) {
+                    try {
+                        db.transaction((txn) => {
+                            txn.executeSql(
+                                'INSERT INTO fav(id, name, image, rating, stars, price) VALUES(?,?,?,?,?,?)',
+                                [item.id, item.name, item.image_url, item.rating, item.review_count, item.price]
+                            );
+                        });
+                        console.log(`added ${item.name}`);
+                        setPresent(true);
+                    }
+                    catch (e) {
+                        console.log("error inserting item: " + e);
+                        setPresent(false);
+                    }
                 }
-            });
-        });
-        db.transaction((txn) => {
-            txn.executeSql("SELECT * FROM fav WHERE id= ?", [data.id], function (tx, res) {
-                if (res.rows.length > 0){
-                    console.log('found..................................................................................'+data.name);
-                    isPresent =  true;
+                else {
+                    try {
+                        db.transaction((txn) => {
+                            txn.executeSql(
+                                'DELETE FROM fav WHERE id = ?',
+                                [item.id]
+                            );
+                        });
+                        console.log(`removed ${item.name}`);
+                        setPresent(false);
+                    }
+                    catch (e) {
+                        console.log("error removing item: " + e);
+                        setPresent(true);
+                    }
                 }
-                else
-                    isPresent =  false;
-            });
+            }
+            )
         });
-    });
+    }
+
 
     return (
         <View style={styles.view}>
-            <Image style={styles.image} source={{ uri: data.image_url }} />
+            <Image style={styles.image} source={{ uri: data.image }} />
             <Text style={styles.name}>{data.name}</Text>
             <Text style={styles.details}>{data.rating} stars, {data.review_count} reviews</Text>
-            <Icon style={[styles.fav, isPresent? {color :'orange'}:{color:'white'}]} name='ios-star' size={25} onPress={() => { addToFavourites(data) }} />
+            <Icon style={[styles.fav, isPresent ? { color: 'orange' } : { color: 'white' }]} name='ios-star' size={25} onPress={() => { addToFavourites(data) }} />
         </View>
     );
 
