@@ -11,6 +11,7 @@ const DrawerNavigator = () => {
         <Drawer.Navigator initialRouteName="Home">
             <Drawer.Screen name="Home" component={BottomTabNavigator} options={{
                 title: 'Search Restaurants',
+                headerShown: false,
                 drawerIcon: ({ focused, size }) => (
                     <Ionicons
                         name="md-home"

@@ -4,15 +4,18 @@ import Ionicons from 'react-native-ionicons';
 import { HeaderButton, HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 
-import SearchScreen from '../screens/SearchScreen'
 import FavoriteScreen from '../screens/FavoriteScreen';
 import ContactScreen from '../screens/ContactScreen';
+import DetailsScreen from '../screens/DetailsScreen';
+import SearchScreen from '../screens/SearchScreen';
+
 
 
 
 const HomeStack = createStackNavigator();
 const FavoriteStack = createStackNavigator();
 const ContactStack = createStackNavigator();
+
 
 
 const IoniconsHeaderButton = (props) => (
@@ -29,6 +32,7 @@ const HomeStackScreen = ({ navigation }) => {
                 component={SearchScreen}
                 options={({ route }) => ({
                     headerTitle: 'Search Restaurants',
+                    headerShown: true,
                     headerLeft: () => {
                         return (
                             <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
@@ -38,11 +42,27 @@ const HomeStackScreen = ({ navigation }) => {
                     }
                 })}
             />
+            <HomeStack.Screen
+                name="Details"
+                component={DetailsScreen}
+                options={({ route }) => ({
+                    headerShown: true,
+                    tabBarVisible: false,
+                    headerTitle: route.params.name,
+                    headerLeft: () => {
+                        return (
+                            <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+                                <Item title="Back" iconName='arrow-back' onPress={() => { navigation.goBack() }} />
+                            </HeaderButtons>
+                        );
+                    },
+                })}
+            />
         </HomeStack.Navigator>
     );
 }
 
-// creating stack navigator for explore
+// creating stack navigator for favorites
 
 const FavoriteStackScreen = ({ navigation }) => {
     return (
@@ -52,6 +72,7 @@ const FavoriteStackScreen = ({ navigation }) => {
                 component={FavoriteScreen}
                 options={({ route }) => ({
                     headerTitle: 'Favorite Restaurants',
+                    headerShown: true,
                     headerLeft: () => {
                         return (
                             <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
@@ -86,4 +107,4 @@ const ContactStackScreen = ({ navigation }) => {
     );
 }
 
-export {HomeStackScreen, FavoriteStackScreen, ContactStackScreen};
+export { HomeStackScreen, FavoriteStackScreen, ContactStackScreen };

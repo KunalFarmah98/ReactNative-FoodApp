@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import FavItem from './FavoriteItemComponent';
 import ListItem from './ListItemComponent';
+import { useNavigation } from '@react-navigation/native';
 
 
 const RestaurantComponent = (props)=>{
 
 
+    const navigation = useNavigation();
     const styles = StyleSheet.create({
         view: {
             padding: 10
@@ -19,6 +21,9 @@ const RestaurantComponent = (props)=>{
         }
     });
 
+    if(props.data.length==0)
+        return null;
+
     return (
         <View style = {styles.view}>
             <Text style = {styles.title}>{props.title}</Text>
@@ -29,7 +34,9 @@ const RestaurantComponent = (props)=>{
                 showsHorizontalScrollIndicator = {false}
                 renderItem = {({item})=> {
                     return(
-                        props.isFavorite?<FavItem data = {item}/>:<ListItem data = {item}/>
+                        <TouchableOpacity onPress=  {()=>navigation.navigate('Details', {name: item.name, id: item.id})}>
+                            {props.isFavorite?<FavItem data = {item}/>:<ListItem data = {item}/>}
+                        </TouchableOpacity>
                     );
                 }}/>
         </View>

@@ -12,6 +12,7 @@ const SearchScreen = ()=>{
     const [term, setTerm] = useState("");
 
     // any logic that gives out some results that populate data can be viewed as a hook
+
     const [callSearchApi, results] = useResults();
     
 
@@ -30,9 +31,9 @@ const SearchScreen = ()=>{
                     onTermChange = {newTerm => setTerm(newTerm)} 
                     onTermSubmit = {()=>callSearchApi(term)}/>
 
-                    <RestaurantComponent title='Cost Effective' data = {filterResultsbyPrice('$')}/>
-                    <RestaurantComponent title='Bit Costlier'  data = {filterResultsbyPrice('$$')}/>
-                    <RestaurantComponent title='Big Spender'  data = {filterResultsbyPrice('$$$')}/>
+                    <RestaurantComponent title='Cost Effective' data = {filterResultsbyPrice('$')} />
+                    <RestaurantComponent title='Bit Costlier'  data = {filterResultsbyPrice('$$')} />
+                    <RestaurantComponent title='Big Spender'  data = {filterResultsbyPrice('$$$')} />
 
                 {/* {error.length>0?<Text>{error}</Text>:<Text>We found {results.length} results</Text>} */}
                 </ScrollView>
