@@ -1,5 +1,5 @@
 import React from 'react';
-import Ionicons from 'react-native-ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Platform } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

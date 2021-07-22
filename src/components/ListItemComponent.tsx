@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Image, Text, View, StyleSheet } from 'react-native';
-import Icon from 'react-native-ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import SQLite from "react-native-sqlite-storage";
 
 
@@ -23,7 +23,7 @@ const ListItem = ({ data }) => {
                     try {
                         db.transaction((txn) => {
                             txn.executeSql(
-                                'INSERT INTO fav(id, name, image, rating, stars, price) VALUES(?,?,?,?,?,?)',
+                                'INSERT INTO fav(id, name, image, rating, review_count, price) VALUES(?,?,?,?,?,?)',
                                 [item.id, item.name, item.image, item.rating, item.review_count, item.price]
                             );
                         });

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
 import { View , StyleSheet, Image, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 const SearchBar = (props)=>{
@@ -9,8 +9,7 @@ const SearchBar = (props)=>{
     return(
 
         <View style = {styles.backgorund}>
-
-            <Image source = {require('../assets/loupe.png')} style = {{height: 30, width: 30, alignSelf: 'center', marginHorizontal: 15}}/>
+            <Icon name = 'search' style = {{height: 30, width: 30, alignSelf: 'center', marginHorizontal: 15}} size = {30}/>
             <TextInput style=  {styles.search }
             placeholder = 'Search'
             placeholderTextColor = 'grey'

@@ -1,7 +1,6 @@
 import React from 'react';
-import Ionicons from 'react-native-ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { ContactStackScreen, HomeStackScreen } from '../navigators/StackNavigator';
-import BottomTabNavigator from './BottomNavNavigator';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 

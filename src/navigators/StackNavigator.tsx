@@ -1,13 +1,12 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Ionicons from 'react-native-ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { HeaderButton, HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 
 import FavoriteScreen from '../screens/FavoriteScreen';
 import ContactScreen from '../screens/ContactScreen';
 import DetailsScreen from '../screens/DetailsScreen';
-import SearchScreen from '../screens/SearchScreen';
 import BottomTabNavigator from './BottomNavNavigator';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
@@ -24,9 +23,9 @@ const IoniconsHeaderButton = (props) => (
     <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
 );
 
+// controlling visibility of header based on route name
 const showHeader = (route)=>{
     const routeName = getFocusedRouteNameFromRoute(route);
-    console.log(routeName);
     if(routeName==='Favorites')
         return false;
     return true;
