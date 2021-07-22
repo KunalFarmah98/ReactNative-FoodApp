@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FavoriteStackScreen, HomeStackScreen } from '../navigators/StackNavigator';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import SearchScreen from '../screens/SearchScreen';
 
 
 const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
@@ -19,10 +20,11 @@ const BottomTabNavigator = () => {
       }}>
 
       <Tab.Screen
-        name="Home"
-        component={HomeStackScreen}
+        name="Search"
+        component={SearchScreen}
         options={({route}) => ({
           tabBarLabel: 'Home',
+          title: 'Search Reastaurants',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={25} />
           ),
@@ -33,6 +35,7 @@ const BottomTabNavigator = () => {
         name="Favorites"
         component={FavoriteStackScreen}
         options={({route}) => ({
+          title: 'Favorite Reastaurants',
           tabBarLabel: 'Favorites',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="ios-star" color={color} size={25} />

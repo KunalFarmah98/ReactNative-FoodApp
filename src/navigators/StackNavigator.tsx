@@ -8,6 +8,8 @@ import FavoriteScreen from '../screens/FavoriteScreen';
 import ContactScreen from '../screens/ContactScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import SearchScreen from '../screens/SearchScreen';
+import BottomTabNavigator from './BottomNavNavigator';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 
 
@@ -22,17 +24,25 @@ const IoniconsHeaderButton = (props) => (
     <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
 );
 
+const showHeader = (route)=>{
+    const routeName = getFocusedRouteNameFromRoute(route);
+    console.log(routeName);
+    if(routeName==='Favorites')
+        return false;
+    return true;
+
+}
 
 // creating stack navigator for home
 const HomeStackScreen = ({ navigation }) => {
     return (
         <HomeStack.Navigator>
             <HomeStack.Screen
-                name="Home"
-                component={SearchScreen}
+                name="Tabs"
+                component={BottomTabNavigator}
                 options={({ route }) => ({
                     headerTitle: 'Search Restaurants',
-                    headerShown: true,
+                    headerShown: showHeader(route),
                     headerLeft: () => {
                         return (
                             <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
@@ -46,8 +56,6 @@ const HomeStackScreen = ({ navigation }) => {
                 name="Details"
                 component={DetailsScreen}
                 options={({ route }) => ({
-                    headerShown: true,
-                    tabBarVisible: false,
                     headerTitle: route.params.name,
                     headerLeft: () => {
                         return (

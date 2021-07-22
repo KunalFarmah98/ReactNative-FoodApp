@@ -1,6 +1,6 @@
 import React from 'react';
 import Ionicons from 'react-native-ionicons';
-import { ContactStackScreen } from '../navigators/StackNavigator';
+import { ContactStackScreen, HomeStackScreen } from '../navigators/StackNavigator';
 import BottomTabNavigator from './BottomNavNavigator';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -9,9 +9,7 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => {
     return (
         <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen name="Home" component={BottomTabNavigator} options={{
-                title: 'Search Restaurants',
-                headerShown: false,
+            <Drawer.Screen name="Home" component={HomeStackScreen} options={({ route }) => ({
                 drawerIcon: ({ focused, size }) => (
                     <Ionicons
                         name="md-home"
@@ -19,7 +17,7 @@ const DrawerNavigator = () => {
                         color={focused ? 'purple' : 'gray'}
                     />
                 ),
-            }} />
+            })}/>
             <Drawer.Screen name="Contact" component={ContactStackScreen} options={{
                 title: 'Contact',
                 drawerIcon: ({ focused, size }) => (
