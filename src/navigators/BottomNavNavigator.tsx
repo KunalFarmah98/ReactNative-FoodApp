@@ -4,7 +4,6 @@ import { Platform } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FavoriteStackScreen, HomeStackScreen } from '../navigators/StackNavigator';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import SearchScreen from '../screens/SearchScreen';
 
 
@@ -13,28 +12,33 @@ const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : cre
 const BottomTabNavigator = () => {
 
   return (
+
     <Tab.Navigator
+      initialRouteName='Search'
+      barStyle={{ backgroundColor: 'white', borderTopColor: '#1F51FF', borderTopWidth: 0.3}}
+      activeColor="#1F51FF"
+      inactiveColor="grey"
       tabBarOptions={{
         activeTintColor: 'purple',
-        activeBackgroundColor: 'white'
-      }}>
+        activeBackgroundColor: 'purple',
+      }}
+    >
 
       <Tab.Screen
         name="Search"
         component={SearchScreen}
-        options={({route}) => ({
+        options={({ route }) => ({
           tabBarLabel: 'Home',
           title: 'Search Reastaurants',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={25} />
           ),
-          tabBarVisible: getFocusedRouteNameFromRoute(route)==='Details'?false:true
         })} />
 
       <Tab.Screen
         name="Favorites"
         component={FavoriteStackScreen}
-        options={({route}) => ({
+        options={({ route }) => ({
           title: 'Favorite Reastaurants',
           tabBarLabel: 'Favorites',
           tabBarIcon: ({ color, size }) => (

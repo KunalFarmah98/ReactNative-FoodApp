@@ -1,10 +1,11 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { View, StyleSheet, Text, Linking, TouchableOpacity } from 'react-native';
 import { openComposer } from 'react-native-email-link';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-const ContactScreen = () => {
+const ContactScreen = ({navigation}) => {
 
 
     const call = (number: String) => {

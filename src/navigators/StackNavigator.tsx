@@ -9,8 +9,7 @@ import ContactScreen from '../screens/ContactScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import BottomTabNavigator from './BottomNavNavigator';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-
-
+import Modal from '../screens/Modal';
 
 
 const HomeStack = createStackNavigator();
@@ -24,9 +23,9 @@ const IoniconsHeaderButton = (props) => (
 );
 
 // controlling visibility of header based on route name
-const showHeader = (route)=>{
+const showHeader = (route) => {
     const routeName = getFocusedRouteNameFromRoute(route);
-    if(routeName==='Favorites')
+    if (routeName === 'Favorites')
         return false;
     return true;
 
@@ -35,7 +34,14 @@ const showHeader = (route)=>{
 // creating stack navigator for home
 const HomeStackScreen = ({ navigation }) => {
     return (
-        <HomeStack.Navigator>
+        <HomeStack.Navigator
+            screenOptions={{
+                /* default options to be applied to each screen (can be overriden by individual screens)*/
+                headerStyle: {
+                    backgroundColor: '#1F51FF',
+                },
+                headerTintColor: '#fff'
+            }}>
             <HomeStack.Screen
                 name="Tabs"
                 component={BottomTabNavigator}
@@ -45,7 +51,7 @@ const HomeStackScreen = ({ navigation }) => {
                     headerLeft: () => {
                         return (
                             <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-                                <Item title="Menu" iconName='ios-menu' onPress={() => { navigation.openDrawer() }} />
+                                <Item title="Menu" iconName='ios-menu' color='white' onPress={() => { navigation.toggleDrawer() }} />
                             </HeaderButtons>
                         );
                     }
@@ -59,7 +65,7 @@ const HomeStackScreen = ({ navigation }) => {
                     headerLeft: () => {
                         return (
                             <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-                                <Item title="Back" iconName='arrow-back' onPress={() => { navigation.goBack() }} />
+                                <Item title="Back" iconName='arrow-back' color='white' onPress={() => { navigation.goBack() }} />
                             </HeaderButtons>
                         );
                     },
@@ -73,7 +79,14 @@ const HomeStackScreen = ({ navigation }) => {
 
 const FavoriteStackScreen = ({ navigation }) => {
     return (
-        <FavoriteStack.Navigator>
+        <FavoriteStack.Navigator
+            screenOptions={{
+                /* default options to be applied to each screen (can be overriden by individual screens)*/
+                headerStyle: {
+                    backgroundColor: '#1F51FF',
+                },
+                headerTintColor: '#fff'
+            }}>
             <FavoriteStack.Screen
                 name="Favorite"
                 component={FavoriteScreen}
@@ -83,7 +96,7 @@ const FavoriteStackScreen = ({ navigation }) => {
                     headerLeft: () => {
                         return (
                             <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-                                <Item title="Menu" iconName='ios-menu' onPress={() => { navigation.openDrawer() }} />
+                                <Item title="Menu" iconName='ios-menu' color='white' onPress={() => { navigation.openDrawer() }} />
                             </HeaderButtons>
                         );
                     }
@@ -95,7 +108,14 @@ const FavoriteStackScreen = ({ navigation }) => {
 
 const ContactStackScreen = ({ navigation }) => {
     return (
-        <ContactStack.Navigator>
+        <ContactStack.Navigator
+            screenOptions={{
+                /* default options to be applied to each screen (can be overriden by individual screens)*/
+                headerStyle: {
+                    backgroundColor: '#1F51FF',
+                },
+                headerTintColor: '#fff'
+            }}>
             <ContactStack.Screen
                 name="Contact"
                 component={ContactScreen}
@@ -104,7 +124,7 @@ const ContactStackScreen = ({ navigation }) => {
                     headerLeft: () => {
                         return (
                             <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-                                <Item title="Back" iconName='arrow-back' onPress={() => { navigation.goBack() }} />
+                                <Item title="Back" iconName='arrow-back' color='white' onPress={() => { navigation.goBack() }} />
                             </HeaderButtons>
                         );
                     }
